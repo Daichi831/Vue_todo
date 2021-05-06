@@ -11,7 +11,12 @@
         <ul>
             <li v-for="(todo, index) in todos">
             <input type="text" :readonly="editIndex != index" v-model="todo.comment"></input>
-            <button v-on:click="doEdit(index)">編集</button>
+            <template v-if="editIndex != index">
+                <button v-on:click="doEdit(index)">編集</button>
+            </template>
+            <template v-else>
+                <button v-on:click="doEdit(index)">更新</button>
+            </template>
             <button v-on:click="doRemove(index)">削除</button>
             </li>
         </ul>
