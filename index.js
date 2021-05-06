@@ -27,6 +27,7 @@ const app = new Vue({
 
     doEdit: function (index) {
       this.editIndex = this.editIndex >= 0 ? -1 : index
+      this.doSave()
     },
 
     doSave: function () {
