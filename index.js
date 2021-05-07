@@ -2,6 +2,7 @@ const app = new Vue({
   el: '#app',
   data: {
     todos: [],
+    newTodo: null,
     editIndex: -1
   },
   mounted () {
@@ -10,27 +11,26 @@ const app = new Vue({
     }
   },
   methods: {
-    doAdd: function () {
-      const comment = this.$refs.comment
-      if (!comment.value.length) {
+    add: function () {
+      if (!this.newTodo) {
         return
       }
-      this.todos.push({ comment: comment.value })
-      comment.value = ''
-      this.doSave()
+      this.todos.push({ comment: this.newTodo })
+      this.newTodo = ''
+      this.save()
     },
 
-    doRemove: function (index) {
+    remove: function (index) {
       this.todos.splice(index, 1)
-      this.doSave()
+      this.save()
     },
 
-    doEdit: function (index) {
+    edit: function (index) {
       this.editIndex = this.editIndex >= 0 ? -1 : index
-      this.doSave()
+      this.save()
     },
 
-    doSave: function () {
+    save: function () {
       localStorage.setItem('todos', JSON.stringify(this.todos))
     }
   }

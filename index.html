@@ -10,20 +10,20 @@
         <h1>ToDoリスト</h1>
         <ul>
             <li v-for="(todo, index) in todos">
-            <input type="text" :readonly="editIndex != index" v-model="todo.comment"></input>
-            <template v-if="editIndex != index">
-                <button v-on:click="doEdit(index)">編集</button>
-            </template>
-            <template v-else>
-                <button v-on:click="doEdit(index)">更新</button>
-            </template>
-            <button v-on:click="doRemove(index)">削除</button>
+                <input type="text" :readonly="editIndex != index" v-model="todo.comment"></input>
+                <template v-if="editIndex != index">
+                    <button v-on:click="edit(index)">編集</button>
+                </template>
+                <template v-else>
+                    <button v-on:click="save()">更新</button>
+                </template>
+                <button v-on:click="remove(index)">削除</button>
             </li>
         </ul>
 
         <h2>新規作成</h2>
-        <form class="add-form" v-on:submit.prevent="doAdd">
-          <input type="text" ref="comment">
+        <form class="add-form" v-on:submit.prevent="add">
+          <input type="text" v-model="newTodo">
           <button type="submit">追加</button>
         </form>
     </div>
