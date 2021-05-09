@@ -3,7 +3,7 @@ const app = new Vue({
   data: {
     todos: [],
     newTodo: null,
-    editIndex: -1
+    editIndex: null
   },
   mounted () {
     if (localStorage.getItem('todos')) {
@@ -26,8 +26,16 @@ const app = new Vue({
     },
 
     edit: function (index) {
-      this.editIndex = this.editIndex >= 0 ? -1 : index
-      this.save()
+        if (this.editIndex === null) {
+            this.editIndex = index
+        }
+    },
+
+    update: function (index) {
+        if (this.editIndex === index) {
+            this.editIndex = null
+        }
+        this.save()
     },
 
     save: function () {
