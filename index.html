@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+</head>
+<body>
+    <div id="app">
+        <h1>ToDoリスト</h1>
+        <ul>
+            <li v-for="(todo, index) in todos">
+                <input type="text" :readonly="editIndex != index" v-model="todo.comment"></input>
+                <template v-if="editIndex != index">
+                    <button v-on:click="edit(index)">編集</button>
+                </template>
+                <template v-else>
+                    <button v-on:click="update(index)">更新</button>
+                </template>
+                <button v-on:click="remove(index)">削除</button>
+            </li>
+        </ul>
+
+        <h2>新規作成</h2>
+        <form class="add-form" v-on:submit.prevent="add">
+          <input type="text" v-model="newTodo">
+          <button type="submit">追加</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
